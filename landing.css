@@ -1,0 +1,124 @@
+/* --- Landing Page Specific Styles --- */
+
+.landing-content {
+    margin-top: 40px;
+    text-align: center;
+}
+
+/* Before/After Slider */
+.before-after-slider {
+    position: relative;
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px var(--shadow-color);
+    border: 2px solid var(--border-color);
+    /* Use grid to stack images */
+    display: grid;
+    place-items: center;
+}
+
+.slider-image-bottom,
+.slider-image-top {
+    /* Make images fill the grid cell */
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+.slider-image-top {
+    /* This is the magic part: the top image is clipped using clip-path */
+    clip-path: polygon(0 0, 50% 0, 50% 100%, 0% 100%);
+    z-index: 2; /* Ensure it's on top of the bottom image */
+}
+
+.slider-range {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: ew-resize;
+    z-index: 4; /* On top of everything */
+}
+
+.slider-handle {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 100%;
+    background-color: var(--accent-primary);
+    z-index: 3;
+    cursor: ew-resize; /* Show that it's draggable */
+    box-shadow: -2px 0 10px rgba(0,0,0,0.5), 2px 0 10px rgba(0,0,0,0.5);
+}
+
+.slider-handle::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--accent-primary);
+    border-radius: 50%;
+    background-color: var(--bg-secondary);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2300aaff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 18L2 12l6-6M16 6l6 6-6 6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.slider-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 4px; /* Needs a size to be draggable */
+    height: 100%;
+    background: transparent; /* Make it invisible */
+    cursor: ew-resize;
+}
+
+.slider-range::-moz-range-thumb {
+    width: 4px; /* Needs a size to be draggable */
+    height: 100%;
+    background: transparent; /* Make it invisible */
+    cursor: ew-resize;
+    border: none;
+    border-radius: 0;
+}
+
+
+/* Call to Action Section */
+.cta-section {
+    margin: 50px auto;
+    max-width: 600px;
+}
+
+.cta-section h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.cta-section p {
+    color: var(--text-secondary);
+    margin-bottom: 30px;
+}
+
+.cta-btn {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    display: inline-block;
+    width: auto;
+}

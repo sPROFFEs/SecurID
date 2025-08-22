@@ -1,0 +1,376 @@
+/* --- Modern Dark Theme Overhaul --- */
+
+/* 1. Imports & Root Variables */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+    --bg-primary: #1a1d21;
+    --bg-secondary: #272a30;
+    --bg-tertiary: #3a3f47;
+    --text-primary: #f0f0f0;
+    --text-secondary: #a0a7b3;
+    --accent-primary: #00aaff;
+    --accent-primary-darker: #0088cc;
+    --accent-secondary: #3d4a5f;
+    --accent-success: #28a745;
+    --accent-success-darker: #218838;
+    --accent-danger: #dc3545;
+    --accent-danger-darker: #c82333;
+    --border-color: #4a5058;
+    --shadow-color: rgba(0, 0, 0, 0.25);
+    --font-main: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* 2. General Body & Layout Styles */
+body {
+    font-family: var(--font-main);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.main-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 25px;
+}
+
+.main-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.main-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: -1px;
+}
+
+.main-header p {
+    font-size: 1.15rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 10px auto 0;
+}
+
+.editor-layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.canvas-wrapper {
+    flex: 3;
+    min-width: 500px;
+}
+
+.controls-panel {
+    flex: 1;
+    min-width: 350px;
+    background-color: var(--bg-secondary);
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 20px var(--shadow-color);
+}
+
+/* 3. Editor Area & Canvas */
+.editor-area {
+    border: 2px dashed var(--border-color);
+    border-radius: 12px;
+    min-height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-secondary);
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s;
+}
+
+.editor-area:hover {
+    border-color: var(--accent-primary);
+}
+
+.editor-area.dragover {
+    border-color: var(--accent-success);
+    background-color: var(--bg-tertiary);
+}
+
+.placeholder-text {
+    color: var(--text-secondary);
+    text-align: center;
+    padding: 20px;
+}
+
+canvas {
+    max-width: 100%;
+    height: auto;
+    display: none;
+    cursor: default;
+    border-radius: 8px;
+}
+
+canvas.redact-mode {
+    cursor: crosshair;
+}
+
+/* 4. Control Panel Sections */
+.control-section {
+    margin-bottom: 30px;
+}
+.control-section:last-child {
+    margin-bottom: 0;
+}
+
+.control-section h4 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 15px;
+}
+.control-section h4 svg {
+    width: 20px;
+    height: 20px;
+    fill: var(--accent-primary);
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* 5. Inputs, Selects, and Sliders */
+input[type="file"],
+input[type="text"],
+select {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+    color: var(--text-primary);
+    font-family: var(--font-main);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+input[type="file"] {
+    padding: 10px;
+}
+input[type="file"]::file-selector-button {
+    background-color: var(--accent-secondary);
+    color: var(--text-primary);
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+input[type="file"]::file-selector-button:hover {
+    background-color: var(--bg-tertiary);
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px rgba(0, 170, 255, 0.2);
+}
+
+.slider-group {
+    margin-bottom: 20px;
+}
+.slider-group label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.slider-group span {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    background: var(--bg-tertiary);
+    border-radius: 3px;
+    outline: none;
+    margin-top: 10px;
+}
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    background: var(--accent-primary);
+    cursor: pointer;
+    border-radius: 50%;
+    border: 2px solid var(--bg-secondary);
+    transition: background-color 0.2s;
+}
+input[type="range"]::-webkit-slider-thumb:hover {
+    background-color: var(--accent-primary-darker);
+}
+input[type="range"]::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    background: var(--accent-primary);
+    cursor: pointer;
+    border-radius: 50%;
+    border: 2px solid var(--bg-secondary);
+}
+
+/* 6. Buttons */
+.tool-btn, .tool-btn-secondary, .download-btn {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.2s ease-in-out;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+.tool-btn svg, .tool-btn-secondary svg, .download-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+.tool-btn {
+    background-color: var(--accent-secondary);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+.tool-btn:hover {
+    background-color: var(--bg-tertiary);
+    border-color: var(--accent-secondary);
+}
+.tool-btn.active {
+    background-color: var(--accent-primary);
+    color: var(--bg-primary);
+    border-color: var(--accent-primary);
+}
+.tool-btn.active:hover {
+    background-color: var(--accent-primary-darker);
+}
+
+.tool-btn-secondary {
+    background-color: transparent;
+    color: var(--accent-danger);
+    border: 1px solid var(--accent-danger);
+}
+.tool-btn-secondary:hover {
+    background-color: var(--accent-danger);
+    color: var(--text-primary);
+}
+
+.download-btn {
+    background-color: var(--accent-success);
+    color: var(--text-primary);
+}
+.download-btn:hover {
+    background-color: var(--accent-success-darker);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* 7. Radio Buttons */
+.radio-group {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    background-color: var(--bg-primary);
+    padding: 10px;
+    border-radius: 6px;
+}
+.radio-group input[type="radio"] {
+    display: none;
+}
+.radio-group label {
+    flex: 1;
+    margin: 0;
+    padding: 10px;
+    border-radius: 4px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+    color: var(--text-secondary);
+}
+.radio-group input[type="radio"]:checked + label {
+    background-color: var(--accent-primary);
+    color: var(--bg-primary);
+    font-weight: 600;
+}
+.radio-group label:hover {
+    background-color: var(--bg-tertiary);
+}
+
+/* 8. Responsive Adjustments */
+@media (max-width: 992px) {
+    .editor-layout {
+        flex-direction: column;
+    }
+    .controls-panel {
+        min-width: unset;
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+/* 9. Footer and Utility Styles */
+.main-footer {
+    margin-top: 40px;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+    padding-top: 25px;
+    color: var(--text-secondary);
+}
+
+.main-footer a {
+    color: var(--accent-primary);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.main-footer a:hover {
+    color: var(--accent-primary-darker);
+}
+
+.main-footer .open-source-notice {
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
+
+kbd {
+    background-color: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 3px 6px;
+    font-family: monospace;
+    font-size: 0.85em;
+    color: var(--text-primary);
+}
